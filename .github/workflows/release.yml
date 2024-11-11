@@ -1,7 +1,4 @@
 # Source: https://docs.obsidian.md/Plugins/Releasing/Release+your+plugin+with+GitHub+Actions
-# to trigger it use:
-#   git tag -a 1.0.1 -m "1.0.1"
-#   git push origin 1.0.1
 name: Release Obsidian plugin
 on:
     push:
@@ -39,7 +36,4 @@ jobs:
                   zip -r "${PLUGIN_NAME}".zip "$PLUGIN_NAME"
 
                   tag="${GITHUB_REF#refs/tags/}"
-                  gh release create "$tag" \
-                    --title="$tag" \
-                    --draft \
-                    ${PLUGIN_NAME}.zip
+                  gh release create "$tag" --generate-notes ${PLUGIN_NAME}.zip
