@@ -1,0 +1,43 @@
+/*
+ * Original Source: community plugin privacy glasses
+ * Modified by markusmo3
+ * Last updated: 2024-10-29
+ */
+
+:root {
+    --blur-level: 0.5rem;
+}
+
+$element-selectors: (
+    ".data-link-text[data-link-tags*='#private']": 1, // Link items
+    ".dataview tr:has(a[data-link-tags*='#private'])": 1, // dataview tables
+    ".suggestion-item:has([data-link-tags*='#private'])": 1, // Search results
+    ".tree-item:has([data-link-tags*='#private']) .search-result-file-match": 1,
+
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .inline-title": 1,
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-line": 1,
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(.metadata-property)": 1,
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(img, video, svg, canvas)": 4,
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5)": 1,
+);
+
+@each $selector, $m in $element-selectors {
+    #{$selector} {
+        filter: blur(calc(var(--blur-level) * #{$m}));
+    }
+}
+
+$reveal-templates: (
+    "" ".inline-title:focus-within",
+    "" ".cm-active",
+    "" ":hover",
+    "body.private-mode-reveal-all "
+);
+
+@each $selector, $m in $element-selectors {
+    @each $prefix, $suffix in $reveal-templates {
+        #{$prefix}#{$selector}#{$suffix} {
+            filter: unset !important;
+        }
+    }
+}

@@ -1,0 +1,42 @@
+# Source: https://docs.obsidian.md/Plugins/Releasing/Release+your+plugin+with+GitHub+Actions
+name: Release Obsidian plugin
+on:
+    push:
+        tags:
+            - "*"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16.x"
+
+            - name: Build plugin
+              run: |
+                  npm install
+                  npm run sass
+                  npm run build
+
+            - name: Create release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PLUGIN_NAME: ${{ github.event.repository.name }}
+              run: |
+                  for f in main.js manifest.json styles.scss styles.css; do
+                      if [[ -f $f ]]; then
+                          cp $f "${PLUGIN_NAME}/"
+                      fi
+                  done
+                  zip -r "$PLUGIN_NAME".zip "$PLUGIN_NAME"
+
+                  tag="${GITHUB_REF#refs/tags/}"
+                  gh release create "$tag" \
+                    --title="$tag" \
+                    --draft \
+                    $PLUGIN_NAME.zip
