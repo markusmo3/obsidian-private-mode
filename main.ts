@@ -1,8 +1,8 @@
 /*
-  Privacy Glasses plugin for Obsidian
-  Copyright 2021 Jill Alberts
-  Licensed under the MIT License (http://opensource.org/licenses/MIT)
-*/
+ * Private Mode plugin for Obsidian
+ * Copyright 2021 Markus Moser
+ * Licensed under the MIT License (http://opensource.org/licenses/MIT)
+ */
 
 import {
     addIcon,
@@ -19,7 +19,7 @@ enum CssClass {
     RevealAll = "private-mode-reveal-all",
 }
 
-export default class PrivacyGlassesPlugin extends Plugin {
+export default class PrivateModePlugin extends Plugin {
     statusBar: HTMLElement;
     statusBarSpan: HTMLSpanElement;
     currentLevel: Level = Level.HidePrivate;
@@ -48,7 +48,7 @@ export default class PrivacyGlassesPlugin extends Plugin {
         });
 
         this.addCommand({
-            id: "privacy-glasses-hide-private",
+            id: "private-mode-hide-private",
             name: "Hide Private",
             callback: () => {
                 this.currentLevel = Level.HidePrivate;
@@ -57,7 +57,7 @@ export default class PrivacyGlassesPlugin extends Plugin {
         });
 
         this.addCommand({
-            id: "privacy-glasses-reveal-all",
+            id: "private-mode-reveal-all",
             name: "Reveal all",
             callback: () => {
                 this.currentLevel = Level.RevealAll;
