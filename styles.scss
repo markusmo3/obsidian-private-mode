@@ -41,3 +41,15 @@ $reveal-templates: (
         }
     }
 }
+
+/* add a private callout */
+.callout[data-callout="private"] {
+    --callout-color: 158, 158, 158;
+    --callout-icon: lucide-lock;
+}
+body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-collapsed) > .callout-content {
+    filter: blur(0.5rem);
+}
+body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-collapsed) > .callout-content:hover {
+    filter: none;
+}
