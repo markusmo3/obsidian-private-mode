@@ -30,7 +30,7 @@ $element-selectors: (
 $reveal-templates: (
     "" ".inline-title:focus-within",
     "" ".cm-active",
-    "" ":hover",
+    "body.private-mode-reveal-on-hover " ":hover",
     "body.private-mode-reveal-all "
 );
 
