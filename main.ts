@@ -45,22 +45,9 @@ export default class PrivateModePlugin extends Plugin {
         addIcon("eye-hand", eyeHand);
         addIcon("eye-closed", eyeClosedIcon);
 
-        this.addRibbonIcon("eye-closed", "Hide Private", () => {
-            this.currentLevel = Level.HidePrivate;
-            this.updateGlobalRevealStyle();
-        });
-        this.addRibbonIcon("eye-hand", "Reveal on hover", () => {
-            this.currentLevel = Level.RevealOnHover;
-            this.updateGlobalRevealStyle();
-        });
-        this.addRibbonIcon("eye", "Reveal all", () => {
-            this.currentLevel = Level.RevealAll;
-            this.updateGlobalRevealStyle();
-        });
-
         this.addCommand({
             id: "private-mode-hide-private",
-            name: "Hide Private",
+            name: "Hide #private",
             callback: () => {
                 this.currentLevel = Level.HidePrivate;
                 this.updateGlobalRevealStyle();
@@ -69,7 +56,7 @@ export default class PrivateModePlugin extends Plugin {
 
         this.addCommand({
             id: "private-mode-reveal-on-hover",
-            name: "Reveal on hover",
+            name: "Reveal #private on hover",
             callback: () => {
                 this.currentLevel = Level.RevealOnHover;
                 this.updateGlobalRevealStyle();
@@ -78,7 +65,7 @@ export default class PrivateModePlugin extends Plugin {
 
         this.addCommand({
             id: "private-mode-reveal-all",
-            name: "Reveal all",
+            name: "Reveal #private always",
             callback: () => {
                 this.currentLevel = Level.RevealAll;
                 this.updateGlobalRevealStyle();
