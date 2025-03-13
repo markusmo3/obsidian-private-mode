@@ -32,14 +32,5 @@ The plugin is not available on the community page, as its mostly for me personal
    * to compile the scss you can use sass `npm install -g sass` and `sass styles.scss styles.css`
 5. Enable the plugin in your Obsidian in the Settings panel "Community Plugins"
 
-# Releasing
-There is an automatic GitHub release workflow in place that gets triggered on a push of a tag.
-To push a tag:
-
-```bash
-git tag 1.0.1
-git push origin 1.0.1
-```
-
 # Credits
 Huge thanks to [Privacy Glasses](https://github.com/jillalberts/privacy-glasses/tree/master) for the groundwork and being licensed under MIT. Use that plugin if you want a more in depth configuration. I personally didn't need or want that much customization and overhead in my plugin. Also i found the "flickering" when opening any file to be too distracting, so i created a simpler version for myself.
