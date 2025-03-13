@@ -32,11 +32,7 @@ export default class PrivateModePlugin extends Plugin {
         this.statusBar.ariaLabel = "Toggle Private Mode"
         this.statusBar.setAttr("data-tooltip-position", "top")
         this.statusBar.onClickEvent(() => {
-            switch (this.currentLevel) {
-                case Level.HidePrivate: this.currentLevel = Level.RevealOnHover; break;
-                case Level.RevealOnHover: this.currentLevel = Level.RevealAll; break;
-                case Level.RevealAll: this.currentLevel = Level.HidePrivate; break;
-            }
+            this.cycleCurrentLevel();
             this.updateGlobalRevealStyle();
         });
         this.statusBarSpan = this.statusBar.createSpan( { text: "" });
@@ -72,9 +68,36 @@ export default class PrivateModePlugin extends Plugin {
             },
         });
 
+        this.addCommand({
+            id: "private-mode-cycle",
+            name: "Cycle #private mode",
+            hotkeys: [{
+                modifiers: ['Alt'],
+                key: "L"
+            }],
+            callback: () => {
+                this.cycleCurrentLevel();
+                this.updateGlobalRevealStyle();
+            },
+        });
+
         this.app.workspace.onLayoutReady(() => {
             this.updateGlobalRevealStyle();
         });
+    }
+
+    private cycleCurrentLevel() {
+        switch (this.currentLevel) {
+            case Level.HidePrivate:
+                this.currentLevel = Level.RevealOnHover;
+                break;
+            case Level.RevealOnHover:
+                this.currentLevel = Level.RevealAll;
+                break;
+            case Level.RevealAll:
+                this.currentLevel = Level.HidePrivate;
+                break;
+        }
     }
 
     updateGlobalRevealStyle() {
