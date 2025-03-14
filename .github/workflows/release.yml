@@ -31,3 +31,4 @@ jobs:
 
                   tag="${GITHUB_REF#refs/tags/}"
                   gh release create "$tag" --generate-notes ${PLUGIN_NAME}.zip
+                  gh release upload "$tag" ${PLUGIN_NAME}/main.js ${PLUGIN_NAME}/manifest.json ${PLUGIN_NAME}/styles.css
