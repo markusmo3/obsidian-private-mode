@@ -56,6 +56,6 @@ body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-coll
     filter: none;
 }
 
-body.private-mode-unprotected-screenshare .status-bar-item.plugin-obsidian-private-mode {
+body.private-mode-unprotected-screenshare .status-bar-item.plugin-private-mode {
     color: var(--text-error);
 }

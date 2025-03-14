@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "node esbuild.config.mjs",
         "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production && sass styles.scss styles.css",
-        "make-release": "npm run build && bash ./.github/make_release.sh obsidian-private-mode",
+        "make-release": "npm run build && bash ./.github/make_release.sh private-mode",
         "version": "node version-bump.mjs && git add manifest.json versions.json",
         "lint": "eslint --cache --fix"
     },
