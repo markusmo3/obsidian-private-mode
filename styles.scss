@@ -55,3 +55,7 @@ body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-coll
 body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-collapsed) > .callout-content:hover {
     filter: none;
 }
+
+body.private-mode-unprotected-screenshare .status-bar-item.plugin-obsidian-private-mode {
+    color: var(--text-error);
+}

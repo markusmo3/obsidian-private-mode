@@ -6,6 +6,7 @@
 
 import {
     addIcon,
+    Menu,
     Plugin,
     setIcon,
 } from "obsidian";
@@ -19,27 +20,83 @@ enum Level {
 enum CssClass {
     RevealAll = "private-mode-reveal-all",
     RevealOnHover = "private-mode-reveal-on-hover",
+    UnprotectedScreenshare = "private-mode-unprotected-screenshare"
 }
 
 export default class PrivateModePlugin extends Plugin {
     statusBar: HTMLElement;
     statusBarSpan: HTMLSpanElement;
     currentLevel: Level = Level.RevealOnHover;
+    currentScreenshareProtection: boolean = true;
 
     async onload() {
         this.statusBar = this.addStatusBarItem();
         this.statusBar.addClass("mod-clickable")
         this.statusBar.ariaLabel = "Toggle Private Mode"
         this.statusBar.setAttr("data-tooltip-position", "top")
-        this.statusBar.onClickEvent(() => {
-            this.cycleCurrentLevel();
-            this.updateGlobalRevealStyle();
+        this.statusBar.onClickEvent((event) => {
+            if (event.button != 0) {
+                const menu = new Menu();
+                menu.addItem((item) =>
+                    item
+                        .setTitle('Reveal all')
+                        .setIcon('eye')
+                        .setChecked(this.currentLevel == Level.RevealAll)
+                        .onClick(() => {
+                            this.currentLevel = Level.RevealAll
+                            this.updateGlobalRevealStyle();
+                        })
+                );
+                menu.addItem((item) =>
+                    item
+                        .setTitle('Reveal on hover')
+                        .setIcon('eye-hand')
+                        .setChecked(this.currentLevel == Level.RevealOnHover)
+                        .onClick(() => {
+                            this.currentLevel = Level.RevealOnHover
+                            this.updateGlobalRevealStyle();
+                        })
+                );
+                menu.addItem((item) =>
+                    item
+                        .setTitle('Reveal never')
+                        .setIcon('eye-closed')
+                        .setChecked(this.currentLevel == Level.HidePrivate)
+                        .onClick(() => {
+                            this.currentLevel = Level.HidePrivate
+                            this.updateGlobalRevealStyle();
+                        })
+                );
+                menu.addSeparator()
+                menu.addItem((item) =>
+                    item
+                        .setTitle('Visibility when screensharing')
+                        .setIcon('screencast')
+                        .setChecked(!this.currentScreenshareProtection)
+                        .onClick(() => {
+                            this.currentScreenshareProtection = !this.currentScreenshareProtection;
+                            item.setChecked(!this.currentScreenshareProtection)
+                            this.updateGlobalRevealStyle();
+                        })
+                );
+                menu.showAtMouseEvent(event);
+            } else {
+                // left click
+                if (event.altKey) {
+                    this.currentScreenshareProtection = !this.currentScreenshareProtection;
+                    this.updateGlobalRevealStyle();
+                } else {
+                    this.cycleCurrentLevel();
+                    this.updateGlobalRevealStyle();
+                }
+            }
         });
         this.statusBarSpan = this.statusBar.createSpan( { text: "" });
 
         addIcon("eye", eyeIcon);
         addIcon("eye-hand", eyeHand);
         addIcon("eye-closed", eyeClosedIcon);
+        addIcon("screencast", screencastIcon);
 
         this.addCommand({
             id: "private-mode-hide-private",
@@ -81,6 +138,19 @@ export default class PrivateModePlugin extends Plugin {
             },
         });
 
+        this.addCommand({
+            id: "private-mode-toggle-screenshare-protection",
+            name: "Toggle Screenshare protection",
+            hotkeys: [{
+                modifiers: ['Shift', 'Alt'],
+                key: "L"
+            }],
+            callback: () => {
+                this.currentScreenshareProtection = !this.currentScreenshareProtection
+                this.updateGlobalRevealStyle();
+            },
+        })
+
         this.app.workspace.onLayoutReady(() => {
             this.updateGlobalRevealStyle();
         });
@@ -102,18 +172,23 @@ export default class PrivateModePlugin extends Plugin {
 
     updateGlobalRevealStyle() {
         this.removeAllClasses();
-        this.setClassToDocumentBody(this.currentLevel);
+        this.setClassToDocumentBody();
+        window.require("electron").remote.getCurrentWindow().setContentProtection(this.currentScreenshareProtection)
     }
 
     removeAllClasses() {
         document.body.removeClass(
             CssClass.RevealAll,
-            CssClass.RevealOnHover
+            CssClass.RevealOnHover,
+            CssClass.UnprotectedScreenshare
         );
     }
 
-    setClassToDocumentBody(currentLevel: Level) {
-        switch (currentLevel) {
+    setClassToDocumentBody() {
+        if (!this.currentScreenshareProtection) {
+            document.body.classList.add(CssClass.UnprotectedScreenshare)
+        }
+        switch (this.currentLevel) {
             case Level.HidePrivate:
                 setIcon(this.statusBarSpan, "eye-closed")
                 break;
@@ -138,3 +213,6 @@ const eyeHand = `<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xM
 
 // https://icon-sets.iconify.design/ph/eye/
 const eyeIcon = `<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256"><path fill="currentColor" d="M247.31 124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57 61.26 162.88 48 128 48S61.43 61.26 36.34 86.35C17.51 105.18 9 124 8.69 124.76a8 8 0 0 0 0 6.5c.35.79 8.82 19.57 27.65 38.4C61.43 194.74 93.12 208 128 208s66.57-13.26 91.66-38.34c18.83-18.83 27.3-37.61 27.65-38.4a8 8 0 0 0 0-6.5M128 192c-30.78 0-57.67-11.19-79.93-33.25A133.5 133.5 0 0 1 25 128a133.3 133.3 0 0 1 23.07-30.75C70.33 75.19 97.22 64 128 64s57.67 11.19 79.93 33.25A133.5 133.5 0 0 1 231.05 128c-7.21 13.46-38.62 64-103.05 64m0-112a48 48 0 1 0 48 48a48.05 48.05 0 0 0-48-48m0 80a32 32 0 1 1 32-32a32 32 0 0 1-32 32"/></svg>`;
+
+// https://icon-sets.iconify.design/ph/screencast/
+const screencastIcon = `<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256"><path fill="currentColor" d="M232 56v144a16 16 0 0 1-16 16h-72a8 8 0 0 1 0-16h72V56H40v40a8 8 0 0 1-16 0V56a16 16 0 0 1 16-16h176a16 16 0 0 1 16 16M32 184a8 8 0 0 0 0 16a8 8 0 0 1 8 8a8 8 0 0 0 16 0a24 24 0 0 0-24-24m0-32a8 8 0 0 0 0 16a40 40 0 0 1 40 40a8 8 0 0 0 16 0a56.06 56.06 0 0 0-56-56m0-32a8 8 0 0 0 0 16a72.08 72.08 0 0 1 72 72a8 8 0 0 0 16 0a88.1 88.1 0 0 0-88-88"/></svg>`;
