@@ -173,7 +173,9 @@ export default class PrivateModePlugin extends Plugin {
     updateGlobalRevealStyle() {
         this.removeAllClasses();
         this.setClassToDocumentBody();
-        window.require("electron").remote.getCurrentWindow().setContentProtection(this.currentScreenshareProtection)
+        if (window.require !== undefined) {
+            window.require("electron").remote.getCurrentWindow().setContentProtection(this.currentScreenshareProtection)
+        }
     }
 
     removeAllClasses() {
