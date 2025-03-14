@@ -18,16 +18,13 @@ jobs:
                   node-version: "18.x"
 
             - name: Build plugin
-              run: |
-                  npm install
-                  npm run build
-
-            - name: Create release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   PLUGIN_NAME: ${{ github.event.repository.name }}
               run: |
-                  sh ./.github/make_release.sh ${PLUGIN_NAME}
+                  npm install
+                  npm run build
+                  bash ./.github/make_release.sh ${PLUGIN_NAME}
 
                   tag="${GITHUB_REF#refs/tags/}"
                   gh release create "$tag" --generate-notes ${PLUGIN_NAME}.zip

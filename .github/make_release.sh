@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 PLUGIN_NAME=${1:-${PWD##*/}}
 
