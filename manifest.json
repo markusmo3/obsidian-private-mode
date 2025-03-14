@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-private-mode",
 	"name": "Private Mode",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"minAppVersion": "1.6.0",
 	"description": "Simple #private mode",
 	"author": "markusmo3",
