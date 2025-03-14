@@ -19,6 +19,8 @@ $element-selectors: (
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(.metadata-property)": 1,
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(img, video, svg, canvas)": 4,
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5)": 1,
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-embed-block": 1,
+    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .internal-embed": 1,
 );
 
 @each $selector, $m in $element-selectors {
