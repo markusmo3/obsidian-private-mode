@@ -19,9 +19,9 @@ Simple #private mode for [Obsidian](https://obsidian.md/). All files, links and 
   * left click to cycle visibility
   * right click to open the menu
   * red means recording and obsidian will be visible in screensharing
-* ⌨️ Keyboard shortcuts
-  * ALT-L cycles visibility
-  * ALT-SHIFT-L cycles screen share protection
+* ⌨️ Recommended keyboard shortcuts (not set by default)
+  * ALT-L to cycle visibility
+  * ALT-SHIFT-L to cycle screen share protection
 * 💬 Callout `private`, which is also blurred and can be collapsed via default Obsidian behaviour for even more "hidden-ness"
   ```markdown
   > [!private]- Optional Title

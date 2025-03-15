@@ -128,10 +128,6 @@ export default class PrivateModePlugin extends Plugin {
         this.addCommand({
             id: "private-mode-cycle",
             name: "Cycle #private mode",
-            hotkeys: [{
-                modifiers: ['Alt'],
-                key: "L"
-            }],
             callback: () => {
                 this.cycleCurrentLevel();
                 this.updateGlobalRevealStyle();
@@ -141,10 +137,6 @@ export default class PrivateModePlugin extends Plugin {
         this.addCommand({
             id: "private-mode-toggle-screenshare-protection",
             name: "Toggle Screenshare protection",
-            hotkeys: [{
-                modifiers: ['Shift', 'Alt'],
-                key: "L"
-            }],
             callback: () => {
                 this.currentScreenshareProtection = !this.currentScreenshareProtection
                 this.updateGlobalRevealStyle();
