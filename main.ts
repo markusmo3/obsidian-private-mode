@@ -1,6 +1,6 @@
 /*
  * Private Mode plugin for Obsidian
- * Copyright 2021 Markus Moser
+ * Copyright 2025 Markus Moser
  * Licensed under the MIT License (http://opensource.org/licenses/MIT)
  */
 
@@ -32,7 +32,7 @@ export default class PrivateModePlugin extends Plugin {
     async onload() {
         this.statusBar = this.addStatusBarItem();
         this.statusBar.addClass("mod-clickable")
-        this.statusBar.ariaLabel = "Toggle Private Mode"
+        this.statusBar.ariaLabel = "Toggle private mode"
         this.statusBar.setAttr("data-tooltip-position", "top")
         this.statusBar.onClickEvent((event) => {
             if (event.button != 0) {
@@ -99,7 +99,7 @@ export default class PrivateModePlugin extends Plugin {
         addIcon("screencast", screencastIcon);
 
         this.addCommand({
-            id: "private-mode-hide-private",
+            id: "hide-private",
             name: "Hide #private",
             callback: () => {
                 this.currentLevel = Level.HidePrivate;
@@ -108,7 +108,7 @@ export default class PrivateModePlugin extends Plugin {
         });
 
         this.addCommand({
-            id: "private-mode-reveal-on-hover",
+            id: "reveal-on-hover",
             name: "Reveal #private on hover",
             callback: () => {
                 this.currentLevel = Level.RevealOnHover;
@@ -117,7 +117,7 @@ export default class PrivateModePlugin extends Plugin {
         });
 
         this.addCommand({
-            id: "private-mode-reveal-all",
+            id: "reveal-all",
             name: "Reveal #private always",
             callback: () => {
                 this.currentLevel = Level.RevealAll;
@@ -126,7 +126,7 @@ export default class PrivateModePlugin extends Plugin {
         });
 
         this.addCommand({
-            id: "private-mode-cycle",
+            id: "cycle-mode",
             name: "Cycle #private mode",
             callback: () => {
                 this.cycleCurrentLevel();
@@ -135,8 +135,8 @@ export default class PrivateModePlugin extends Plugin {
         });
 
         this.addCommand({
-            id: "private-mode-toggle-screenshare-protection",
-            name: "Toggle Screenshare protection",
+            id: "toggle-screenshare-protection",
+            name: "Toggle screenshare protection",
             callback: () => {
                 this.currentScreenshareProtection = !this.currentScreenshareProtection
                 this.updateGlobalRevealStyle();
