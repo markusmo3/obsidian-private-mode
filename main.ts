@@ -7,6 +7,7 @@
 import {
     addIcon,
     Menu,
+    Platform,
     Plugin,
     setIcon,
 } from "obsidian";
@@ -40,7 +41,7 @@ export default class PrivateModePlugin extends Plugin {
                 menu.addItem((item) =>
                     item
                         .setTitle('Reveal all')
-                        .setIcon('eye')
+                        .setIcon('ph--eye')
                         .setChecked(this.currentLevel == Level.RevealAll)
                         .onClick(() => {
                             this.currentLevel = Level.RevealAll
@@ -50,7 +51,7 @@ export default class PrivateModePlugin extends Plugin {
                 menu.addItem((item) =>
                     item
                         .setTitle('Reveal on hover')
-                        .setIcon('eye-hand')
+                        .setIcon('ph--eye-hand')
                         .setChecked(this.currentLevel == Level.RevealOnHover)
                         .onClick(() => {
                             this.currentLevel = Level.RevealOnHover
@@ -60,7 +61,7 @@ export default class PrivateModePlugin extends Plugin {
                 menu.addItem((item) =>
                     item
                         .setTitle('Reveal never')
-                        .setIcon('eye-closed')
+                        .setIcon('ph--eye-closed')
                         .setChecked(this.currentLevel == Level.HidePrivate)
                         .onClick(() => {
                             this.currentLevel = Level.HidePrivate
@@ -71,7 +72,7 @@ export default class PrivateModePlugin extends Plugin {
                 menu.addItem((item) =>
                     item
                         .setTitle('Visibility when screensharing')
-                        .setIcon('screencast')
+                        .setIcon('ph--screencast')
                         .setChecked(!this.currentScreenshareProtection)
                         .onClick(() => {
                             this.currentScreenshareProtection = !this.currentScreenshareProtection;
@@ -93,10 +94,10 @@ export default class PrivateModePlugin extends Plugin {
         });
         this.statusBarSpan = this.statusBar.createSpan( { text: "" });
 
-        addIcon("eye", eyeIcon);
-        addIcon("eye-hand", eyeHand);
-        addIcon("eye-closed", eyeClosedIcon);
-        addIcon("screencast", screencastIcon);
+        addIcon("ph--eye", eyeIcon);
+        addIcon("ph--eye-hand", eyeHand);
+        addIcon("ph--eye-closed", eyeClosedIcon);
+        addIcon("ph--screencast", screencastIcon);
 
         this.addCommand({
             id: "hide-private",
@@ -165,7 +166,8 @@ export default class PrivateModePlugin extends Plugin {
     updateGlobalRevealStyle() {
         this.removeAllClasses();
         this.setClassToDocumentBody();
-        if (window.require !== undefined) {
+
+        if (Platform.isDesktopApp) {
             window.require("electron").remote.getCurrentWindow().setContentProtection(this.currentScreenshareProtection)
         }
     }
@@ -184,15 +186,15 @@ export default class PrivateModePlugin extends Plugin {
         }
         switch (this.currentLevel) {
             case Level.HidePrivate:
-                setIcon(this.statusBarSpan, "eye-closed")
+                setIcon(this.statusBarSpan, "ph--eye-closed")
                 break;
             case Level.RevealOnHover:
                 document.body.classList.add(CssClass.RevealOnHover);
-                setIcon(this.statusBarSpan, "eye-hand")
+                setIcon(this.statusBarSpan, "ph--eye-hand")
                 break;
             case Level.RevealAll:
                 document.body.classList.add(CssClass.RevealAll);
-                setIcon(this.statusBarSpan, "eye")
+                setIcon(this.statusBarSpan, "ph--eye")
                 break;
         }
     }

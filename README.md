@@ -12,10 +12,10 @@ Simple #private mode for [Obsidian](https://obsidian.md/). All files, links and 
   * Reveal all: to disable the blurring completely
   * Reveal on hover: only show #private content on hover (default)
   * Reveal never: only show #private content for the currently editing line
-* 💻 By default not visible when using screenshare! Keep your secrets :)
+* 💻 By default not visible when using screenshare! Keep your secrets :) (desktop-only)
 * 📱 Supported on Obsidian Mobile
 * 🎀 Commands to set visibility (also usable on mobile)
-* ✅ Status bar indicator that shows the current state
+* ✅ Status bar indicator that shows the current state (desktop-only)
   * left click to cycle visibility
   * right click to open the menu
   * red means recording and obsidian will be visible in screensharing
