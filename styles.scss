@@ -9,10 +9,11 @@
 }
 
 $element-selectors: (
-    ".data-link-text[data-link-tags*='#private']": 1, // Link items
+    ".data-link-text[data-link-tags*='#private']:not(.tree-item-inner,.suggestion-title)": 1, // Link items
     ".dataview tr:has(a[data-link-tags*='#private'])": 1, // dataview tables
     ".suggestion-item:has([data-link-tags*='#private'])": 1, // Search results
-    ".tree-item:has([data-link-tags*='#private']) .search-result-file-match": 1,
+    ".nav-file-title:has([data-link-tags*='#private'])": 1, // "Files" tree
+    ".search-result:has([data-link-tags*='#private'])": 1, // Sidebar search
 
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .inline-title": 1,
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-line": 1,
@@ -32,6 +33,9 @@ $element-selectors: (
 $reveal-templates: (
     "" ".inline-title:focus-within",
     "" ".cm-active",
+    "body.private-mode-reveal-on-hover " ".is-selected",
+    "body.private-mode-reveal-on-hover " ".has-focus",
+    "body.private-mode-reveal-on-hover " ":has(.has-focus)",
     "body.private-mode-reveal-on-hover " ":hover",
     "body.private-mode-reveal-all "
 );
