@@ -56,7 +56,7 @@ $reveal-templates: (
 body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-collapsed) > .callout-content {
     filter: blur(0.5rem);
 }
-body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-collapsed) > .callout-content:hover {
+body.private-mode-reveal-on-hover .callout[data-callout="private"]:not(.is-collapsed) > .callout-content:hover {
     filter: none;
 }
 
