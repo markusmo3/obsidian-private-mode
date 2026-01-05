@@ -4,13 +4,7 @@
  * Licensed under the MIT License (http://opensource.org/licenses/MIT)
  */
 
-import {
-    addIcon,
-    Menu,
-    Platform,
-    Plugin,
-    setIcon,
-} from "obsidian";
+import {addIcon, Menu, Platform, Plugin, setIcon,} from "obsidian";
 
 enum Level {
     HidePrivate = "hide-private",
@@ -21,7 +15,8 @@ enum Level {
 enum CssClass {
     RevealAll = "private-mode-reveal-all",
     RevealOnHover = "private-mode-reveal-on-hover",
-    UnprotectedScreenshare = "private-mode-unprotected-screenshare"
+    UnprotectedScreenshare = "private-mode-unprotected-screenshare",
+    BlurLinksToo = "private-mode-blur-links-too"
 }
 
 export default class PrivateModePlugin extends Plugin {
@@ -29,6 +24,7 @@ export default class PrivateModePlugin extends Plugin {
     statusBarSpan: HTMLSpanElement;
     currentLevel: Level = Level.RevealOnHover;
     currentScreenshareProtection: boolean = true;
+    blurLinksToo: boolean = true;
 
     async onload() {
         this.statusBar = this.addStatusBarItem();
@@ -71,6 +67,17 @@ export default class PrivateModePlugin extends Plugin {
                 menu.addSeparator()
                 menu.addItem((item) =>
                     item
+                        .setTitle('Blur Links too')
+                        .setIcon('ph--link')
+                        .setChecked(this.blurLinksToo)
+                        .onClick(() => {
+                            this.blurLinksToo = !this.blurLinksToo;
+                            item.setChecked(!this.blurLinksToo)
+                            this.updateGlobalRevealStyle();
+                        })
+                );
+                menu.addItem((item) =>
+                    item
                         .setTitle('Visibility when screensharing')
                         .setIcon('ph--screencast')
                         .setChecked(!this.currentScreenshareProtection)
@@ -98,6 +105,7 @@ export default class PrivateModePlugin extends Plugin {
         addIcon("ph--eye-hand", eyeHand);
         addIcon("ph--eye-closed", eyeClosedIcon);
         addIcon("ph--screencast", screencastIcon);
+        addIcon("ph--link", linkIcon);
 
         this.addCommand({
             id: "hide-private",
@@ -176,13 +184,17 @@ export default class PrivateModePlugin extends Plugin {
         document.body.removeClass(
             CssClass.RevealAll,
             CssClass.RevealOnHover,
-            CssClass.UnprotectedScreenshare
+            CssClass.UnprotectedScreenshare,
+            CssClass.BlurLinksToo
         );
     }
 
     setClassToDocumentBody() {
         if (!this.currentScreenshareProtection) {
             document.body.classList.add(CssClass.UnprotectedScreenshare)
+        }
+        if (this.blurLinksToo) {
+            document.body.classList.add(CssClass.BlurLinksToo)
         }
         switch (this.currentLevel) {
             case Level.HidePrivate:
@@ -212,3 +224,6 @@ const eyeIcon = `<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xM
 
 // https://icon-sets.iconify.design/ph/screencast/
 const screencastIcon = `<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256"><path fill="currentColor" d="M232 56v144a16 16 0 0 1-16 16h-72a8 8 0 0 1 0-16h72V56H40v40a8 8 0 0 1-16 0V56a16 16 0 0 1 16-16h176a16 16 0 0 1 16 16M32 184a8 8 0 0 0 0 16a8 8 0 0 1 8 8a8 8 0 0 0 16 0a24 24 0 0 0-24-24m0-32a8 8 0 0 0 0 16a40 40 0 0 1 40 40a8 8 0 0 0 16 0a56.06 56.06 0 0 0-56-56m0-32a8 8 0 0 0 0 16a72.08 72.08 0 0 1 72 72a8 8 0 0 0 16 0a88.1 88.1 0 0 0-88-88"/></svg>`;
+
+// https://icon-sets.iconify.design/ph/link/
+const linkIcon = `<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256"><path fill="currentColor" d="M240 88.23a54.43 54.43 0 0 1-16 37L189.25 160a54.27 54.27 0 0 1-38.63 16h-.05A54.63 54.63 0 0 1 96 119.84a8 8 0 0 1 16 .45A38.62 38.62 0 0 0 150.58 160a38.4 38.4 0 0 0 27.31-11.31l34.75-34.75a38.63 38.63 0 0 0-54.63-54.63l-11 11A8 8 0 0 1 135.7 59l11-11a54.65 54.65 0 0 1 77.3 0a54.86 54.86 0 0 1 16 40.23m-131 97.43l-11 11A38.4 38.4 0 0 1 70.6 208a38.63 38.63 0 0 1-27.29-65.94L78 107.31a38.63 38.63 0 0 1 66 28.4a8 8 0 0 0 16 .45A54.86 54.86 0 0 0 144 96a54.65 54.65 0 0 0-77.27 0L32 130.75A54.62 54.62 0 0 0 70.56 224a54.28 54.28 0 0 0 38.64-16l11-11a8 8 0 0 0-11.2-11.34"/></svg>`;

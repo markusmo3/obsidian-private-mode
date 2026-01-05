@@ -3,15 +3,16 @@ Simple #private mode for [Obsidian](https://obsidian.md/). All files, links and 
 
 **This plugin requires the obsidian plugin [Supercharged Links](https://github.com/mdelobelle/obsidian_supercharged_links) to work**
 
-![docs/img.png](./docs/showcase_1.png)
+![docs/showcase_1.png](docs/showcase_1.png)
 
-![docs/img_1.png](./docs/showcase_2.png)
+![docs/showcase_2.png](./docs/showcase_2.png)
 
 # Features
 * 3️⃣ Three Modes
   * Reveal all: to disable the blurring completely
   * Reveal on hover: only show #private content on hover (default)
   * Reveal never: only show #private content for the currently editing line
+* 🔗 Blur also all links to #private files, or not, its your choice
 * 💻 By default not visible when using screenshare! Keep your secrets :) (desktop-only)
 * 📱 Supported on Obsidian Mobile
 * 🎀 Commands to set visibility (also usable on mobile)

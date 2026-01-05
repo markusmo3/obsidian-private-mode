@@ -9,11 +9,11 @@
 }
 
 $element-selectors: (
-    ".data-link-text[data-link-tags*='#private']:not(.tree-item-inner,.suggestion-title)": 1, // Link items
-    ".dataview tr:has(a[data-link-tags*='#private'])": 1, // dataview tables
-    ".suggestion-item:has([data-link-tags*='#private'])": 1, // Search results
-    ".nav-file-title:has([data-link-tags*='#private'])": 1, // "Files" tree
-    ".search-result:has([data-link-tags*='#private'])": 1, // Sidebar search
+    "body.private-mode-blur-links-too .data-link-text[data-link-tags*='#private']:not(.tree-item-inner,.suggestion-title)": 1, // Link items
+    "body.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*='#private'])": 1, // dataview tables
+    "body.private-mode-blur-links-too .suggestion-item:has([data-link-tags*='#private'])": 1, // Search results
+    "body.private-mode-blur-links-too .nav-file-title:has([data-link-tags*='#private'])": 1, // "Files" tree
+    "body.private-mode-blur-links-too .search-result:has([data-link-tags*='#private'])": 1, // Sidebar search
 
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .inline-title": 1,
     ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-line": 1,
@@ -60,6 +60,7 @@ body.private-mode-reveal-on-hover .callout[data-callout="private"]:not(.is-colla
     filter: none;
 }
 
+/* screenshare protection */
 body.private-mode-unprotected-screenshare .status-bar-item.plugin-private-mode {
     color: var(--text-error);
 }
