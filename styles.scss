@@ -9,23 +9,23 @@
 }
 
 $element-selectors: (
-    "body.private-mode-blur-links-too .data-link-text[data-link-tags*='#private']:not(.tree-item-inner,.suggestion-title)": 1, // Link items
-    "body.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*='#private'])": 1, // dataview tables
-    "body.private-mode-blur-links-too .suggestion-item:has([data-link-tags*='#private'])": 1, // Search results
-    "body.private-mode-blur-links-too .nav-file-title:has([data-link-tags*='#private'])": 1, // "Files" tree
-    "body.private-mode-blur-links-too .search-result:has([data-link-tags*='#private'])": 1, // Sidebar search
+    ".private-mode-blur-links-too" ".data-link-text[data-link-tags*='#private']:not(.tree-item-inner,.suggestion-title)" 1, // Link items
+    ".private-mode-blur-links-too" ".dataview tr:has(a[data-link-tags*='#private'])" 1, // dataview tables
+    ".private-mode-blur-links-too" ".suggestion-item:has([data-link-tags*='#private'])" 1, // Search results
+    ".private-mode-blur-links-too" ".nav-file-title:has([data-link-tags*='#private'])" 1, // "Files" tree
+    ".private-mode-blur-links-too" ".search-result:has([data-link-tags*='#private'])" 1, // Sidebar search
 
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .inline-title": 1,
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-line": 1,
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(.metadata-property)": 1,
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(img, video, svg, canvas)": 4,
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5)": 1,
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-embed-block": 1,
-    ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .internal-embed": 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .inline-title" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-line" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(.metadata-property)" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(img, video, svg, canvas)" 4,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5)" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-embed-block" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .internal-embed" 1,
 );
 
-@each $selector, $m in $element-selectors {
-    #{$selector} {
+@each $bodySelector, $selector, $m in $element-selectors {
+    body#{$bodySelector} #{$selector} {
         filter: blur(calc(var(--blur-level) * #{$m}));
     }
 }
@@ -33,16 +33,16 @@ $element-selectors: (
 $reveal-templates: (
     "" ".inline-title:focus-within",
     "" ".cm-active",
-    "body.private-mode-reveal-on-hover " ".is-selected",
-    "body.private-mode-reveal-on-hover " ".has-focus",
-    "body.private-mode-reveal-on-hover " ":has(.has-focus)",
-    "body.private-mode-reveal-on-hover " ":hover",
-    "body.private-mode-reveal-all "
+    ".private-mode-reveal-on-hover" ".is-selected",
+    ".private-mode-reveal-on-hover" ".has-focus",
+    ".private-mode-reveal-on-hover" ":has(.has-focus)",
+    ".private-mode-reveal-on-hover" ":hover",
+    ".private-mode-reveal-all"
 );
 
-@each $selector, $m in $element-selectors {
-    @each $prefix, $suffix in $reveal-templates {
-        #{$prefix}#{$selector}#{$suffix} {
+@each $bodySelector, $selector, $m in $element-selectors {
+    @each $bodyPrefix, $suffix in $reveal-templates {
+        body#{$bodyPrefix}#{$bodySelector} #{$selector}#{$suffix} {
             filter: unset !important;
         }
     }
