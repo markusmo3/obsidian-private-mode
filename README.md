@@ -39,5 +39,9 @@ Simple #private mode for [Obsidian](https://obsidian.md/). All files, links and 
    * to compile the scss you can use sass `npm install -g sass` and `sass styles.scss styles.css`
 6. Enable the two plugins in your Obsidian in the Settings panel "Community Plugins"
 
+# Troubleshooting
+* My file content is not hidden!
+  * Make sure you have the Supercharged Links setting "Enable in tab headers" turned on. Also try turning that off and on again if it was on already. Sometimes Supercharged Links doesnt correctly tag the tab headers.
+
 # Credits
 Huge thanks to [Privacy Glasses](https://github.com/jillalberts/privacy-glasses/tree/master) for the groundwork and being licensed under MIT. Use that plugin if you want a more in depth configuration. I personally didn't need or want that much customization and overhead in my plugin. Also i found the "flickering" when opening any file to be too distracting, so i created a simpler version for myself.
