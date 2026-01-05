@@ -19,14 +19,24 @@ enum CssClass {
     BlurLinksToo = "private-mode-blur-links-too"
 }
 
+interface PrivateModePluginSettings {
+    currentScreenshareProtection: boolean;
+    blurLinksToo: boolean;
+}
+
+const DEFAULT_SETTINGS: Partial<PrivateModePluginSettings> = {
+    currentScreenshareProtection:  true,
+    blurLinksToo: true,
+};
+
 export default class PrivateModePlugin extends Plugin {
     statusBar: HTMLElement;
     statusBarSpan: HTMLSpanElement;
+    settings: PrivateModePluginSettings;
     currentLevel: Level = Level.RevealOnHover;
-    currentScreenshareProtection: boolean = true;
-    blurLinksToo: boolean = true;
 
     async onload() {
+        this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
         this.statusBar = this.addStatusBarItem();
         this.statusBar.addClass("mod-clickable")
         this.statusBar.ariaLabel = "Toggle private mode"
@@ -69,10 +79,10 @@ export default class PrivateModePlugin extends Plugin {
                     item
                         .setTitle('Blur Links too')
                         .setIcon('ph--link')
-                        .setChecked(this.blurLinksToo)
+                        .setChecked(this.settings.blurLinksToo)
                         .onClick(() => {
-                            this.blurLinksToo = !this.blurLinksToo;
-                            item.setChecked(!this.blurLinksToo)
+                            this.settings.blurLinksToo = !this.settings.blurLinksToo;
+                            item.setChecked(!this.settings.blurLinksToo)
                             this.updateGlobalRevealStyle();
                         })
                 );
@@ -80,10 +90,10 @@ export default class PrivateModePlugin extends Plugin {
                     item
                         .setTitle('Visibility when screensharing')
                         .setIcon('ph--screencast')
-                        .setChecked(!this.currentScreenshareProtection)
+                        .setChecked(!this.settings.currentScreenshareProtection)
                         .onClick(() => {
-                            this.currentScreenshareProtection = !this.currentScreenshareProtection;
-                            item.setChecked(!this.currentScreenshareProtection)
+                            this.settings.currentScreenshareProtection = !this.settings.currentScreenshareProtection;
+                            item.setChecked(!this.settings.currentScreenshareProtection)
                             this.updateGlobalRevealStyle();
                         })
                 );
@@ -91,7 +101,7 @@ export default class PrivateModePlugin extends Plugin {
             } else {
                 // left click
                 if (event.altKey) {
-                    this.currentScreenshareProtection = !this.currentScreenshareProtection;
+                    this.settings.currentScreenshareProtection = !this.settings.currentScreenshareProtection;
                     this.updateGlobalRevealStyle();
                 } else {
                     this.cycleCurrentLevel();
@@ -147,7 +157,7 @@ export default class PrivateModePlugin extends Plugin {
             id: "toggle-screenshare-protection",
             name: "Toggle screenshare protection",
             callback: () => {
-                this.currentScreenshareProtection = !this.currentScreenshareProtection
+                this.settings.currentScreenshareProtection = !this.settings.currentScreenshareProtection
                 this.updateGlobalRevealStyle();
             },
         })
@@ -171,12 +181,17 @@ export default class PrivateModePlugin extends Plugin {
         }
     }
 
+    async saveSettings() {
+        await this.saveData(this.settings);
+    }
+
     updateGlobalRevealStyle() {
+        this.saveSettings()
         this.removeAllClasses();
         this.setClassToDocumentBody();
 
         if (Platform.isDesktopApp) {
-            window.require("electron").remote.getCurrentWindow().setContentProtection(this.currentScreenshareProtection)
+            window.require("electron").remote.getCurrentWindow().setContentProtection(this.settings.currentScreenshareProtection)
         }
     }
 
@@ -190,10 +205,10 @@ export default class PrivateModePlugin extends Plugin {
     }
 
     setClassToDocumentBody() {
-        if (!this.currentScreenshareProtection) {
+        if (!this.settings.currentScreenshareProtection) {
             document.body.classList.add(CssClass.UnprotectedScreenshare)
         }
-        if (this.blurLinksToo) {
+        if (this.settings.blurLinksToo) {
             document.body.classList.add(CssClass.BlurLinksToo)
         }
         switch (this.currentLevel) {
