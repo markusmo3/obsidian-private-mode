@@ -24,5 +24,8 @@ data.json
 .DS_Store
 
 # Exclude release
-private-mode/
+/private-mode/
 private-mode.zip
+!private-mode-testvault/**/main.js
+!private-mode-testvault/**/data.json
+!private-mode-testvault/**/styles.css

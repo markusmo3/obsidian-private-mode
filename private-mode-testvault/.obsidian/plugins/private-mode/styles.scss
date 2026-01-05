@@ -1,0 +1,66 @@
+/*
+ * Original Source: community plugin privacy glasses
+ * Modified by markusmo3
+ * Last updated: 2024-10-29
+ */
+
+:root {
+    --blur-level: 0.5rem;
+}
+
+$element-selectors: (
+    ".private-mode-blur-links-too" ".data-link-text[data-link-tags*='#private']:not(.tree-item-inner,.suggestion-title)" 1, // Link items
+    ".private-mode-blur-links-too" ".dataview tr:has(a[data-link-tags*='#private'])" 1, // dataview tables
+    ".private-mode-blur-links-too" ".suggestion-item:has([data-link-tags*='#private'])" 1, // Search results
+    ".private-mode-blur-links-too" ".nav-file-title:has([data-link-tags*='#private'])" 1, // "Files" tree
+    ".private-mode-blur-links-too" ".search-result:has([data-link-tags*='#private'])" 1, // Sidebar search
+
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .inline-title" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-line" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(.metadata-property)" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .view-content :is(img, video, svg, canvas)" 4,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5)" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .cm-embed-block" 1,
+    "" ".workspace-tabs:has(.is-active [data-link-tags*='#private']) .internal-embed" 1,
+);
+
+@each $bodySelector, $selector, $m in $element-selectors {
+    body#{$bodySelector} #{$selector} {
+        filter: blur(calc(var(--blur-level) * #{$m}));
+    }
+}
+
+$reveal-templates: (
+    "" ".inline-title:focus-within",
+    "" ".cm-active",
+    ".private-mode-reveal-on-hover" ".is-selected",
+    ".private-mode-reveal-on-hover" ".has-focus",
+    ".private-mode-reveal-on-hover" ":has(.has-focus)",
+    ".private-mode-reveal-on-hover" ":hover",
+    ".private-mode-reveal-all"
+);
+
+@each $bodySelector, $selector, $m in $element-selectors {
+    @each $bodyPrefix, $suffix in $reveal-templates {
+        body#{$bodyPrefix}#{$bodySelector} #{$selector}#{$suffix} {
+            filter: unset !important;
+        }
+    }
+}
+
+/* add a private callout */
+.callout[data-callout="private"] {
+    --callout-color: 158, 158, 158;
+    --callout-icon: lucide-lock;
+}
+body:not(.private-mode-reveal-all) .callout[data-callout="private"]:not(.is-collapsed) > .callout-content {
+    filter: blur(0.5rem);
+}
+body.private-mode-reveal-on-hover .callout[data-callout="private"]:not(.is-collapsed) > .callout-content:hover {
+    filter: none;
+}
+
+/* screenshare protection */
+body.private-mode-unprotected-screenshare .status-bar-item.plugin-private-mode {
+    color: var(--text-error);
+}

@@ -1,0 +1,413 @@
+/*
+ * Original Source: community plugin privacy glasses
+ * Modified by markusmo3
+ * Last updated: 2024-10-29
+ */
+:root {
+  --blur-level: 0.5rem;
+}
+
+body.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas) {
+  filter: blur(calc(var(--blur-level) * 4));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5) {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed {
+  filter: blur(calc(var(--blur-level) * 1));
+}
+
+body.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all.private-mode-blur-links-too .data-link-text[data-link-tags*="#private"]:not(.tree-item-inner, .suggestion-title) {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all.private-mode-blur-links-too .dataview tr:has(a[data-link-tags*="#private"]) {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all.private-mode-blur-links-too .suggestion-item:has([data-link-tags*="#private"]) {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all.private-mode-blur-links-too .nav-file-title:has([data-link-tags*="#private"]) {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all.private-mode-blur-links-too .search-result:has([data-link-tags*="#private"]) {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title.inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title.cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title.is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title.has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title:has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title:hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .inline-title {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line.inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line.cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line.is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line.has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line:has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line:hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-line {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(.metadata-property) {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .view-content :is(img, video, svg, canvas) {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5).inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5).cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5).is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5).has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5):has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5):hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .markdown-preview-view :is(li, p, h1, h2, h3, h4, h5) {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block.inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block.cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block.is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block.has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block:has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block:hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .cm-embed-block {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed.inline-title:focus-within {
+  filter: unset !important;
+}
+
+body .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed.cm-active {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed.is-selected {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed.has-focus {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed:has(.has-focus) {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-on-hover .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed:hover {
+  filter: unset !important;
+}
+
+body.private-mode-reveal-all .workspace-tabs:has(.is-active [data-link-tags*="#private"]) .internal-embed {
+  filter: unset !important;
+}
+
+/* add a private callout */
+.callout[data-callout=private] {
+  --callout-color: 158, 158, 158;
+  --callout-icon: lucide-lock;
+}
+
+body:not(.private-mode-reveal-all) .callout[data-callout=private]:not(.is-collapsed) > .callout-content {
+  filter: blur(0.5rem);
+}
+
+body.private-mode-reveal-on-hover .callout[data-callout=private]:not(.is-collapsed) > .callout-content:hover {
+  filter: none;
+}
+
+/* screenshare protection */
+body.private-mode-unprotected-screenshare .status-bar-item.plugin-private-mode {
+  color: var(--text-error);
+}
+
+/*# sourceMappingURL=styles.css.map */
